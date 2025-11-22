@@ -16,3 +16,8 @@ client_scripts {
 -- server_scripts {
 --     "server/modules/*.lua",
 -- }
+
+server_scripts {
+    "config/*.lua",
+    "server/modules/*.lua",
+}

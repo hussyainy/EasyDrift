@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 ConfigShared = {}
 ConfigShared.devmod = false -- Keep the UI on by default, usefull when tweaking UI
 ConfigShared.UseDefaultUI = true -- Set this to false if you want to use your own UI
@@ -61,3 +62,10 @@ ConfigShared.PositionsCoords = {
 
 ConfigShared.DisplayAngle = true
 ConfigShared.MaxAngle = 50
+
+ConfigShared.ScoreboardTopCount = 10 -- How many players to show in the scoreboard
+ConfigShared.ScoreboardCommand = "driftscore" -- Command to open the scoreboard
+ConfigShared.ScoreboardKey = 212 -- HOME key (default) to toggle scoreboard
+
+ConfigShared.EnableScoreboard = true -- Enable or disable the scoreboard system
+ConfigShared.ScoreboardTitle = "TOP DRIFTERS" -- Title of the scoreboard

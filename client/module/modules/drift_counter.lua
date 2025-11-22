@@ -1,7 +1,9 @@
+---@diagnostic disable: undefined-global
 Modules.DriftCounter = {}
 Modules.DriftCounter.IsEnabled = true
 Modules.DriftCounter.IsDrifting = false
 Modules.DriftCounter.CurrentPoints = 0
+Modules.DriftCounter.DriftDuration = 0
 Modules.DriftCounter.CurrentAngle = 0 -- Only refreshed when the player is drifting
 Modules.DriftCounter.ChainCooldown = ConfigShared.DriftChainTime
 Modules.DriftCounter.ChainLoopStarted = false
@@ -104,10 +106,14 @@ function Modules.DriftCounter.StartChainBreakLoop()
             if ConfigShared.UseDefaultUI then
                 Modules.DriftCounter.FadeOutHud()
             end
+            if Modules.DriftCounter.CurrentPoints > 0 then
+                TriggerServerEvent("drift:saveScore", Modules.DriftCounter.CurrentPoints, Modules.DriftCounter.DriftDuration)
+            end
             TriggerEvent(ConfigShared.DriftFinishedEvent, Modules.DriftCounter.CurrentPoints)
             Modules.DriftCounter.ChainCooldown = ConfigShared.DriftChainTime
             Modules.DriftCounter.ChainLoopStarted = false
             Modules.DriftCounter.CurrentPoints = 0
+            Modules.DriftCounter.DriftDuration = 0
             Modules.DriftCounter.CurrentAngle = 0
             Modules.DriftCounter.ChainTimeLeft = 0
         end)
@@ -152,6 +158,7 @@ Citizen.CreateThread(function()
                     if ConfigShared.AddStaticPointOnDrifting then
                         Modules.DriftCounter.CurrentPoints = math.floor(Modules.DriftCounter.CurrentPoints + ConfigShared.StaticPointToAdd * Modules.Utils.TimeFrame) -- This fix the issue where player with low fps would get less point then player with high fps count. 
                     end
+                    Modules.DriftCounter.DriftDuration = Modules.DriftCounter.DriftDuration + Modules.Utils.TimeFrame
                 end
             else
                 Modules.DriftCounter.IsDrifting = false

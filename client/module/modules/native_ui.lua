@@ -80,7 +80,7 @@ Citizen.CreateThread(function()
             ShowCursorThisFrame()
             SetMouseCursorSprite(1)
         end
-        
+
         if lockControls then
             for k,v in pairs(Modules.UI.lockedControls[1]) do
                 if v ~= nil then
@@ -112,7 +112,7 @@ end
 
 function Modules.UI.LoadStreamDict(dict)
     while not HasStreamedTextureDictLoaded(dict) do
-        RequestStreamedTextureDict(dict, 1)
+        RequestStreamedTextureDict(dict, true)
         print("Loading dict ", dict)
         Wait(0)
     end
@@ -136,12 +136,12 @@ function Modules.UI.DrawSlider(screenX, screenY, width, height, backgroundColor,
         screenX = x
         screenY = y
 
-        
+
         if IsControlJustReleased(0, 38) then
             TriggerEvent("addToCopy", x..", "..y)
         end
     end
-	
+
     if value > max then
         value = max
     end
@@ -155,7 +155,7 @@ function Modules.UI.DrawSlider(screenX, screenY, width, height, backgroundColor,
 
     local pos = (vector2(screenX, screenY) + vector2(width, height) / 2.0)
     DrawRect(pos[1], pos[2], width, height, backgroundColor[1], backgroundColor[2], backgroundColor[3], backgroundColor[4])
-    
+
     local progressWidth = (value/max) * width
     local progressHeight = height
 
@@ -182,7 +182,7 @@ function Modules.UI.DrawSlider(screenX, screenY, width, height, backgroundColor,
                 local mouse = GetControlNormal(0, 239)
                 local size = ((mouse - screenX) * max) / width
                 newValue = size
-    
+
                 --print(newValue)
                 valueUpdated = true
             end
@@ -292,7 +292,7 @@ function Modules.UI.DrawSpriteNew(textureDict, textureName, screenX, screenY, wi
             end
         end
     end
-    
+
     if settings.Draw3d ~= nil then
         ClearDrawOrigin()
     end
@@ -324,7 +324,7 @@ function Modules.UI.HandleControl()
         if not Modules.UI.cooldown then
             if IsControlJustReleased(0, v) or IsDisabledControlJustReleased(0, v) then
                 Modules.UI.HandleCooldown()
-                return true 
+                return true
             end
         end
     end
@@ -332,7 +332,7 @@ function Modules.UI.HandleControl()
 end
 
 
-function Modules.UI.DrawTexts(x, y, text, center, scale, rgb, font, rightJustify, devmod) 
+function Modules.UI.DrawTexts(x, y, text, center, scale, rgb, font, rightJustify, devmod)
 
     if devmod then
         local x2 = GetControlNormal(0, 239)
@@ -348,7 +348,7 @@ function Modules.UI.DrawTexts(x, y, text, center, scale, rgb, font, rightJustify
 
     if rightJustify ~= 0 and rightJustify ~= false then
         SetTextJustification(2)
-        SetTextWrap(0.0, x) 
+        SetTextWrap(0.0, x)
     end
 
     SetTextFont(font)
@@ -376,7 +376,7 @@ function Modules.UI.DrawTextsNoLimit(x, y, text, center, scale, rgb, font, right
 
     if rightJustify ~= 0 and rightJustify ~= false then
         SetTextJustification(2)
-        SetTextWrap(0.0, x) 
+        SetTextWrap(0.0, x)
     end
 
     SetTextFont(font)
@@ -391,20 +391,20 @@ end
 
 function Modules.UI.Draw3DText(x,y,z,textInput,fontId,scaleX,scaleY)
     local px,py,pz=table.unpack(GetGameplayCamCoords())
-    local dist = GetDistanceBetweenCoords(px,py,pz, x,y,z, 1)    
+    local dist = GetDistanceBetweenCoords(px,py,pz, x,y,z, true)
     local scale = (1/dist)*20
     local fov = (1/GetGameplayCamFov())*100
-    local scale = scale*fov   
+    scale = scale*fov
     SetTextScale(scaleX*scale, scaleY*scale)
     SetTextFont(fontId)
-    SetTextProportional(1)
+    SetTextProportional(true)
     SetTextColour(250, 250, 250, 255)		-- You can change the text color here
     SetTextDropshadow(1, 1, 1, 1, 255)
     SetTextEdge(2, 0, 0, 0, 150)
     SetTextDropShadow()
     SetTextOutline()
     SetTextEntry("STRING")
-    SetTextCentre(1)
+    SetTextCentre(true)
     AddTextComponentString(textInput)
     SetDrawOrigin(x,y,z, 0)
     DrawText(0.0, 0.0)
