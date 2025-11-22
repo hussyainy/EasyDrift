@@ -30,7 +30,7 @@ function Modules.UI.DrawScoreboard()
     Modules.UI.DrawTexts(baseX + (width/2) - 0.02, startY, "Score", false, 0.4, {255, 255, 255, 255}, Modules.UI.font["forza"] or 4, true, false) -- Right justify score
 
     -- Draw Separator
-    DrawRect(baseX, startY + 0.025, width - 0.02, 0.002, 255, 255, 255, 150)
+    DrawRect(baseX, startY + 0.040, width - 0.02, 0.002, 255, 255, 255, 150)
 
     -- Draw List
     local currentY = startY + 0.05
