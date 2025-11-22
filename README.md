@@ -11,6 +11,25 @@ EasyDrift is a simple drift counter that also provides a multitude of events and
 
 ![image](https://user-images.githubusercontent.com/19718604/148116457-20785570-ca14-40c7-9948-e8353927d4ed.png)
 
+## New Features (v2.0)
+
+- **Database Integration**: Automatically saves drift scores to a database.
+- **Scoreboard System**: View top drifters in-game with a clean UI.
+- **Anti-Exploit**: Server-side validation to prevent score hacking.
+- **Configurable**: Easily adjust scoreboard settings and limits.
+
+## Requirements
+
+- [oxmysql](https://github.com/overextended/oxmysql) (Required for database saving)
+
+## Scoreboard
+
+View the top drifters on the server!
+
+- **Command**: `/driftscore` (Configurable)
+- **Keybind**: `HOME` (Configurable)
+
+The scoreboard displays the top players, highlighting the top 3 in Gold, Silver, and Bronze.
 
 ## Events (Client side)
 
